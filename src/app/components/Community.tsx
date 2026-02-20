@@ -58,18 +58,6 @@ export function Community() {
             </motion.a>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-center"
-        >
-          <p className="text-2xl md:text-3xl mb-4">One request:</p>
-          <p className="text-xl md:text-2xl text-gray-400 italic">
-            Tell us what confused you in the first 3 minutes.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

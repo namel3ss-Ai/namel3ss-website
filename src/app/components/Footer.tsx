@@ -11,11 +11,7 @@ export function Footer() {
     <footer className="py-16 px-6 border-t border-gray-200">
       <div className="max-w-6xl mx-auto text-center">
         <h3 className="text-3xl md:text-4xl mb-3">namel3ss</h3>
-        <p className="text-lg text-gray-600">
-          If you can not understand it in 3 minutes, we redesign it.
-        </p>
         
-        {/* Social Links */}
         <div className="flex items-center justify-center gap-6 mt-8 mb-8">
           {socialLinks.map((social) => (
             <a

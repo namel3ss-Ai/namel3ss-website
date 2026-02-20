@@ -1,11 +1,9 @@
 import { Hero } from './components/Hero';
+import { MarketingSlides } from './components/MarketingSlides';
 import { Navigation } from './components/Navigation';
-import { UnderstandingFirst } from './components/UnderstandingFirst';
-import { TheMoment } from './components/TheMoment';
+import { RagApplication } from './components/RagApplication';
 import { WhatMakesItDifferent } from './components/WhatMakesItDifferent';
-import { HowItFeels } from './components/HowItFeels';
 import { Studio } from './components/Studio';
-import { WhatItIs } from './components/WhatItIs';
 import { GetStarted } from './components/GetStarted';
 import { Community } from './components/Community';
 import { Footer } from './components/Footer';
@@ -15,12 +13,10 @@ export default function App() {
     <div className="min-h-screen bg-white text-black">
       <Navigation />
       <Hero />
-      <TheMoment />
-      <UnderstandingFirst />
+      <MarketingSlides />
+      <RagApplication />
       <WhatMakesItDifferent />
-      <HowItFeels />
       <Studio />
-      <WhatItIs />
       <GetStarted />
       <Community />
       <Footer />

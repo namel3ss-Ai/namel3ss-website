@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { useInView } from 'motion/react';
 import { useRef } from 'react';
-import { FileCode, Cpu, Shield, Layout } from 'lucide-react';
+import { FileCode, Cpu, Shield } from 'lucide-react';
 
 export function WhatMakesItDifferent() {
   const ref = useRef(null);
@@ -22,11 +22,6 @@ export function WhatMakesItDifferent() {
       icon: Shield,
       title: "Deterministic everywhere it can be",
       description: "AI is the only non-deterministic boundary — and it's explicit."
-    },
-    {
-      icon: Layout,
-      title: "Bring your own UI",
-      description: "Use the default manifest UI, or ship a custom UI in <project_root>/ui/. Studio will preview it the same way your browser does."
     }
   ];
 

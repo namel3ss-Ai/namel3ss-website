@@ -13,12 +13,12 @@ export function GetStarted() {
       code: "pip install namel3ss"
     },
     {
-      title: "Run the demo",
-      code: "n3 examples/clear_orders/app.ai"
+      title: "Check",
+      code: "n3 check app.ai"
     },
     {
-      title: "Open Studio",
-      code: "n3 examples/clear_orders/app.ai studio"
+      title: "Run",
+      code: "n3 run app.ai --port 7360 --no-open"
     }
   ];
 
@@ -53,21 +53,6 @@ export function GetStarted() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 bg-gray-50 rounded-2xl p-8 border border-gray-200"
-        >
-          <h3 className="text-2xl md:text-3xl mb-4">Status</h3>
-          <p className="text-xl mb-4">Alpha.</p>
-          <p className="text-lg text-gray-600 leading-relaxed">
-            Stable where it matters: structure, determinism, and explainability surfaces.
-            <br />
-            Evolving where it should: UX polish, templates, and onboarding.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

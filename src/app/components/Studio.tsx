@@ -16,8 +16,8 @@ export function Studio() {
           className="text-center mb-16"
         >
           <h2 className="text-5xl md:text-6xl mb-6">Studio</h2>
-          <p className="text-2xl md:text-3xl text-gray-400 italic">
-            The app is the product. Studio is the glass.
+          <p className="text-2xl md:text-3xl text-gray-400">
+            Runtime mirror for debugging and verification.
           </p>
         </motion.div>
 
@@ -27,17 +27,15 @@ export function Studio() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="bg-white/5 border border-white/10 rounded-2xl p-12"
         >
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div className="text-center pb-8 border-b border-white/10">
-              <p className="text-xl text-gray-400 mb-4">App Preview is full screen</p>
-              <div className="inline-flex items-center gap-3 bg-white/10 px-6 py-3 rounded-full">
-                <div className="size-3 bg-white rounded-full" />
-                <p className="text-lg">Run ▸</p>
-              </div>
+              <p className="text-xl text-gray-300">
+                Preview your app exactly as runtime renders it.
+              </p>
             </div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-              {['Graph', 'Traces', 'Memory', 'Why'].map((panel, i) => (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+              {['Traces', 'Memory', 'Diagnostics'].map((panel, i) => (
                 <motion.div
                   key={panel}
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -48,12 +46,6 @@ export function Studio() {
                   <p className="text-lg">{panel}</p>
                 </motion.div>
               ))}
-            </div>
-
-            <div className="text-center pt-8 border-t border-white/10">
-              <p className="text-xl text-gray-400">
-                No settings. No editor. No "developer cockpit."
-              </p>
             </div>
           </div>
         </motion.div>

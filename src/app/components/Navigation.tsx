@@ -32,6 +32,8 @@ export function Navigation() {
 
   const navLinks = [
     { name: 'Overview', href: '#overview' },
+    { name: 'Slides', href: '#slides' },
+    { name: 'RAG App', href: '#rag-application' },
     { name: 'Studio', href: '#studio' },
     { name: 'Docs', href: 'https://github.com/namel3ss-Ai/namel3ss/blob/main/docs/learning-namel3ss.md' },
     { name: 'Community', href: '#community' },
