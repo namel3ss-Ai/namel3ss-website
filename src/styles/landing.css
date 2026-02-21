@@ -172,7 +172,7 @@ li {
 
 .home-section {
   padding: 5.8rem 1.35rem 0;
-  z-index: 2;
+  z-index: 8;
 }
 
 .hero-shell {
@@ -345,6 +345,32 @@ li {
   z-index: 4;
 }
 
+.hero-why-overlay {
+  position: absolute;
+  left: 1.35rem;
+  right: 1.35rem;
+  bottom: 3.2rem;
+  z-index: 12;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.hero-why-shell {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.72));
+  border: 1px solid var(--line-soft);
+  border-radius: 28px;
+  padding: clamp(1.25rem, 2vw, 2.2rem);
+}
+
+.hero-code-shot {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(245, 245, 245, 0.16);
+  background: #050505;
+}
+
 .why-shell {
   background: linear-gradient(180deg, rgba(10, 10, 10, 0.95), rgba(10, 10, 10, 0.72));
   border: 1px solid var(--line-soft);
@@ -429,6 +455,10 @@ pre code {
   #why-namel3ss {
     margin-top: 0;
     padding-top: 6.6rem;
+  }
+
+  .hero-why-overlay {
+    display: none;
   }
 
   .card-grid,

@@ -76,6 +76,7 @@ export function LandingPage() {
   const heroRailRef = useRef<HTMLDivElement | null>(null);
   const heroTriggerRef = useRef<ScrollTrigger | null>(null);
   const whyShellRef = useRef<HTMLDivElement | null>(null);
+  const whyOverlayRef = useRef<HTMLDivElement | null>(null);
 
   const setSectionRef = (id: SectionId) => (node: HTMLElement | null) => {
     sectionRefs.current[id] = node;
@@ -85,8 +86,9 @@ export function LandingPage() {
     const homeSection = sectionRefs.current.home;
     const whySection = sectionRefs.current['why-namel3ss'];
     const heroRail = heroRailRef.current;
-    const heroShell = homeSection?.querySelector<HTMLElement>('.hero-shell') ?? null;
+    const heroControls = homeSection?.querySelector<HTMLElement>('.hero-controls') ?? null;
     const whyShell = whyShellRef.current;
+    const whyOverlay = whyOverlayRef.current;
     if (!homeSection || !heroRail) return;
 
     const panels = Array.from(heroRail.querySelectorAll<HTMLElement>('.hero-panel'));
@@ -125,26 +127,38 @@ export function LandingPage() {
 
       const handoffStart = () => `top+=${heroDistance() * (finalPanelStartRatio + 0.04)}px top`;
       const handoffEnd = () => `top+=${heroDistance() * 0.97}px top`;
+      const overlapStart = () => `top+=${heroDistance() * Math.max(0.7, finalPanelStartRatio)}px top`;
+      const overlapEnd = () => `top+=${heroDistance() * 0.97}px top`;
 
-      if (heroShell) {
-        gsap.to(heroShell, {
-          scale: 0.95,
-          autoAlpha: 0.22,
+      gsap.to([heroRail, heroControls].filter(Boolean), {
+        autoAlpha: 0.15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: homeSection,
+          start: handoffStart,
+          end: handoffEnd,
+          scrub: 1.05,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      if (whyOverlay) {
+        gsap.set(whyOverlay, { autoAlpha: 0, yPercent: 10 });
+        gsap.to(whyOverlay, {
+          autoAlpha: 1,
+          yPercent: 0,
           ease: 'none',
           scrollTrigger: {
             trigger: homeSection,
-            start: handoffStart,
-            end: handoffEnd,
-            scrub: 1.05,
+            start: overlapStart,
+            end: overlapEnd,
+            scrub: 0.9,
             invalidateOnRefresh: true,
           },
         });
       }
 
       if (whySection && whyShell) {
-        const overlapStart = () => `top+=${heroDistance() * Math.max(0.75, finalPanelStartRatio)}px top`;
-        const overlapEnd = () => `top+=${heroDistance() * 0.97}px top`;
-
         gsap.set(whySection, { autoAlpha: 0.08 });
         gsap.set(whyShell, { yPercent: 10 });
 
@@ -286,6 +300,19 @@ export function LandingPage() {
                   aria-label={`Go to hero panel ${index + 1}`}
                 />
               ))}
+            </div>
+          </div>
+          <div className="hero-why-overlay" ref={whyOverlayRef} aria-hidden="true">
+            <div className="hero-why-shell section-stack">
+              <span className="eyebrow">RAG Application</span>
+              <h2>Build a RAG app in 9 lines.</h2>
+              <img
+                className="hero-code-shot"
+                src="/rag-application-code-shot.png"
+                alt="Screenshot of namel3ss rag-application app.ai code"
+                loading="eager"
+                decoding="async"
+              />
             </div>
           </div>
         </div>
