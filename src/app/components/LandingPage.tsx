@@ -1,4 +1,7 @@
 import { Hero } from './Hero';
+import { LastScreen } from './LastScreen';
+import { MagicalCursor } from './MagicalCursor';
+import { ScrollEffects } from './ScrollEffects';
 
 const NAV_ITEMS = [
   { id: 'home', label: 'Home' },
@@ -12,6 +15,8 @@ export function LandingPage() {
 
   return (
     <div className="site">
+      <ScrollEffects />
+      <MagicalCursor />
       <nav className="site-nav">
         <a href="#home" className="site-brand" aria-label="namel3ss home">
           <img src="/namel3ss_horizontal_logo.svg" alt="namel3ss logo" className="site-brand-logo" />
@@ -26,6 +31,7 @@ export function LandingPage() {
       </nav>
 
       <Hero isActive={activeSection === 'home'} sectionRef={setHomeRef} />
+      <LastScreen />
     </div>
   );
 }

@@ -16,6 +16,7 @@ html,
 body,
 #root {
   min-height: 100%;
+  min-height: 100dvh;
   margin: 0;
   background: var(--ink-0);
   color: var(--ink-900);
@@ -28,11 +29,154 @@ body {
   overflow-x: hidden;
 }
 
+body.has-magical-cursor,
+body.has-magical-cursor a,
+body.has-magical-cursor button,
+body.has-magical-cursor input,
+body.has-magical-cursor textarea,
+body.has-magical-cursor select,
+body.has-magical-cursor label {
+  cursor: none !important;
+}
+
 .site {
   position: relative;
   background: var(--ink-0);
   color: var(--ink-900);
   overflow-x: clip;
+}
+
+.magical-cursor-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transition: opacity 220ms ease;
+}
+
+.magical-cursor-core,
+.magical-cursor-ring,
+.magical-cursor-glow,
+.magical-cursor-trail,
+.magical-cursor-spark {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate3d(-200px, -200px, 0) translate(-50%, -50%);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.magical-cursor-core {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #eafcff 65%, rgba(234, 252, 255, 0) 100%);
+  box-shadow:
+    0 0 22px rgba(110, 220, 255, 0.92),
+    0 0 40px rgba(66, 178, 255, 0.66);
+}
+
+.magical-cursor-ring {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(197, 239, 255, 0.78);
+  box-shadow:
+    inset 0 0 12px rgba(188, 235, 255, 0.48),
+    0 0 36px rgba(97, 201, 255, 0.46);
+  opacity: 0.95;
+}
+
+.magical-cursor-glow {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(156, 234, 255, 0.38) 0%, rgba(75, 189, 255, 0.2) 36%, rgba(0, 0, 0, 0) 72%);
+  filter: blur(14px);
+  opacity: 0.42;
+}
+
+.magical-cursor-trail {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(240, 253, 255, 0.98) 0%, rgba(146, 226, 255, 0.56) 45%, rgba(0, 0, 0, 0) 80%);
+  opacity: 0;
+}
+
+.magical-cursor-spark {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(169, 235, 255, 0.82) 48%, rgba(0, 0, 0, 0) 82%);
+  filter: blur(0.35px);
+  opacity: 0;
+}
+
+.scroll-effects {
+  position: fixed;
+  inset: 0;
+  z-index: 18;
+  pointer-events: none;
+}
+
+.scroll-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.scroll-progress-fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  transform: scaleX(0.015);
+  background: linear-gradient(90deg, #a9e9ff 0%, #6ad2ff 34%, #f7fdff 68%, #8ae8ff 100%);
+  box-shadow: 0 0 18px rgba(125, 218, 255, 0.65);
+}
+
+.scroll-progress-glow {
+  position: absolute;
+  top: -5px;
+  left: 0;
+  width: 100%;
+  height: 13px;
+  background: linear-gradient(90deg, rgba(133, 227, 255, 0.12), rgba(92, 206, 255, 0.48), rgba(133, 227, 255, 0.12));
+  filter: blur(8px);
+  opacity: 0.12;
+}
+
+.scroll-orb {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(68px);
+  opacity: 0.22;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.scroll-orb-a {
+  width: min(44vw, 520px);
+  height: min(44vw, 520px);
+  left: -11vw;
+  top: 18vh;
+  background: radial-gradient(circle, rgba(118, 214, 255, 0.46) 0%, rgba(118, 214, 255, 0.2) 38%, rgba(0, 0, 0, 0) 72%);
+}
+
+.scroll-orb-b {
+  width: min(40vw, 460px);
+  height: min(40vw, 460px);
+  right: -10vw;
+  top: 56vh;
+  background: radial-gradient(circle, rgba(153, 235, 255, 0.34) 0%, rgba(153, 235, 255, 0.15) 42%, rgba(0, 0, 0, 0) 76%);
 }
 
 .site-nav {
@@ -45,7 +189,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 1.2rem;
-  padding: 1rem 1.8rem;
+  padding: 0.95rem clamp(0.9rem, 2.8vw, 1.8rem);
   border-bottom: 1px solid rgba(245, 245, 245, 0.12);
   backdrop-filter: blur(12px);
   background: rgba(0, 0, 0, 0.7);
@@ -57,7 +201,7 @@ body {
 }
 
 .site-brand-logo {
-  width: 114px;
+  width: clamp(96px, 14vw, 114px);
   height: auto;
   filter: brightness(0) invert(1);
 }
@@ -95,10 +239,11 @@ body {
   position: relative;
   z-index: 1;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 7.4rem 1.35rem 3rem;
+  padding: clamp(5.8rem, 8vw, 7.4rem) clamp(0.9rem, 2.2vw, 1.35rem) clamp(2rem, 3.8vw, 3rem);
 }
 
 .section-shell {
@@ -263,6 +408,7 @@ li {
   align-items: center;
   justify-content: center;
   min-height: 44px;
+  max-width: 100%;
   border-radius: 999px;
   padding: 0.6rem 1.2rem;
   text-decoration: none;
@@ -291,6 +437,79 @@ li {
 .site-btn.secondary:hover {
   background: rgba(64, 64, 64, 0.84);
   border-color: var(--line-strong);
+}
+
+.last-screen {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--ink-0);
+  overflow: hidden;
+}
+
+.last-screen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: clamp(96px, 16vh, 160px);
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(245, 245, 245, 0.08), rgba(245, 245, 245, 0));
+}
+
+.last-screen-shell {
+  width: min(1240px, 100%);
+  min-height: calc(100vh - 10.4rem);
+  min-height: calc(100dvh - 10.4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.7rem;
+}
+
+.last-screen-logo {
+  width: min(72vw, 580px);
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+.last-screen-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.82rem;
+}
+
+.last-screen-social-link {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 245, 245, 0.18);
+  background: rgba(245, 245, 245, 0.03);
+  color: var(--ink-900);
+  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+}
+
+.last-screen-social-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(245, 245, 245, 0.35);
+  background: rgba(245, 245, 245, 0.09);
+}
+
+.last-screen-social-link:focus-visible {
+  outline: 2px solid rgba(245, 245, 245, 0.42);
+  outline-offset: 2px;
+}
+
+.last-screen-social-icon {
+  width: 20px;
+  height: 20px;
 }
 
 .hero-controls {
@@ -437,6 +656,7 @@ pre code {
 @media (max-width: 980px) {
   .site-nav {
     padding: 0.8rem 1rem;
+    gap: 0.75rem;
   }
 
   .site-nav-links {
@@ -467,9 +687,29 @@ pre code {
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   .site-nav-links {
     display: none;
+  }
+
+  .site-nav {
+    padding: 0.78rem 0.9rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .last-screen-shell {
+    min-height: calc(100vh - 8.6rem);
+    min-height: calc(100dvh - 8.6rem);
+  }
+
+  .last-screen-logo {
+    width: min(84vw, 380px);
+  }
+
+  .last-screen-social-link {
+    width: 42px;
+    height: 42px;
   }
 
   .site-section {
@@ -496,5 +736,75 @@ pre code {
 
   .site-btn {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-nav {
+    padding: 0.68rem 0.8rem;
+  }
+
+  .site-brand-logo {
+    width: 92px;
+  }
+
+  .site-section {
+    padding: 5.6rem 0.8rem 2rem;
+  }
+
+  .last-screen-logo {
+    width: min(88vw, 320px);
+  }
+
+  .last-screen-socials {
+    gap: 0.62rem;
+  }
+
+  .last-screen-social-link {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-height: 720px) and (pointer: fine) {
+  .site-nav {
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .site-section {
+    padding-top: 5.1rem;
+    padding-bottom: 1.6rem;
+  }
+
+  .last-screen-shell {
+    min-height: calc(100vh - 7.2rem);
+    min-height: calc(100dvh - 7.2rem);
+  }
+}
+
+@media (pointer: coarse), (hover: none), (max-width: 760px) {
+  .magical-cursor-layer {
+    display: none !important;
+  }
+
+  .scroll-effects {
+    display: none !important;
+  }
+
+  body.has-magical-cursor,
+  body.has-magical-cursor a,
+  body.has-magical-cursor button,
+  body.has-magical-cursor input,
+  body.has-magical-cursor textarea,
+  body.has-magical-cursor select,
+  body.has-magical-cursor label {
+    cursor: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-effects {
+    display: none !important;
   }
 }
